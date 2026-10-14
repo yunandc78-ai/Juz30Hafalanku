@@ -1,0 +1,1327 @@
+/* ==========================================================================
+   MUROJAAHKU - JUZ 30 HAFALAN DENGAN SISTEM REPETISI
+   Premium Islamic Design System (Emerald & Radiant Gold)
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --bg-dark: #071311;
+  --bg-card: rgba(13, 30, 26, 0.75);
+  --bg-card-hover: rgba(19, 44, 38, 0.9);
+  --bg-glass: rgba(9, 23, 20, 0.85);
+  --border-gold: rgba(229, 184, 105, 0.22);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --gold-primary: #e5b869;
+  --gold-glow: rgba(229, 184, 105, 0.4);
+  --gold-light: #fef3c7;
+  --gold-dark: #b48530;
+
+  --emerald-primary: #10b981;
+  --emerald-dark: #064e3b;
+  --emerald-glow: rgba(16, 185, 129, 0.35);
+
+  /* Status Colors */
+  --status-gray: #64748b;
+  --status-yellow: #f59e0b;
+  --status-green: #10b981;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-gold: #fde68a;
+
+  /* Typography */
+  --font-ui: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-arabic: 'Amiri Quran', 'Amiri', 'Traditional Arabic', serif;
+  --font-size-arabic: 32px;
+
+  /* Elevations & Shapes */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --shadow-gold: 0 8px 32px rgba(229, 184, 105, 0.15);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+  --bg-dark: #f8faf8;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card-hover: rgba(240, 253, 244, 0.95);
+  --bg-glass: rgba(255, 255, 255, 0.92);
+  --border-gold: rgba(180, 133, 48, 0.25);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --gold-primary: #b48530;
+  --gold-glow: rgba(180, 133, 48, 0.2);
+  --emerald-primary: #059669;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --text-gold: #92400e;
+  --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(229, 184, 105, 0.07) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(6, 78, 59, 0.05) 0%, transparent 60%);
+  background-attachment: fixed;
+  line-height: 1.5;
+  padding-bottom: 90px; /* Space for bottom nav */
+}
+
+/* Container */
+.app-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+  position: relative;
+}
+
+/* ==========================================================================
+   HEADER & TOP BARS
+   ========================================================================== */
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-card);
+  position: sticky;
+  top: 12px;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--emerald-primary), var(--gold-primary));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  box-shadow: 0 4px 15px var(--gold-glow);
+}
+
+.brand-text h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(to right, #fff, var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .brand-text h1 {
+  background: linear-gradient(to right, #0f172a, var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-text span {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.1rem;
+}
+
+.icon-btn:hover {
+  background: rgba(229, 184, 105, 0.15);
+  border-color: var(--gold-primary);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   HERO / PROGRESS SUMMARY BANNER
+   ========================================================================== */
+
+.hero-stats-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(229, 184, 105, 0.12));
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-stats-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.hero-title h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+[data-theme="light"] .hero-title h2 {
+  color: #0f172a;
+}
+
+.hero-title p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.streak-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fde68a;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.progress-overall-bar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--emerald-primary), var(--gold-primary));
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px var(--gold-glow);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.stat-item {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+[data-theme="light"] .stat-item {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.stat-item .stat-num {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-gold);
+  display: block;
+}
+
+.stat-item .stat-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   STATUS INDICATOR BADGES (Abu-abu, Kuning, Hijau)
+   ========================================================================== */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge.unmemorized {
+  background: rgba(100, 116, 139, 0.18);
+  border: 1px solid rgba(100, 116, 139, 0.35);
+  color: #cbd5e1;
+}
+
+.status-badge.learning {
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
+}
+
+.status-badge.mastered {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  color: #34d399;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-badge.unmemorized .status-dot {
+  background: var(--status-gray);
+}
+.status-badge.learning .status-dot {
+  background: var(--status-yellow);
+  box-shadow: 0 0 6px var(--status-yellow);
+}
+.status-badge.mastered .status-dot {
+  background: var(--status-green);
+  box-shadow: 0 0 6px var(--status-green);
+}
+
+/* ==========================================================================
+   SURAH LIST & FILTER CONTROLS
+   ========================================================================== */
+
+.filter-section {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.search-input-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.search-input-wrap input {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.search-input-wrap input:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 15px var(--gold-glow);
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.filter-tab {
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.filter-tab:hover,
+.filter-tab.active {
+  background: rgba(229, 184, 105, 0.2);
+  border-color: var(--gold-primary);
+  color: var(--gold-light);
+}
+
+[data-theme="light"] .filter-tab.active {
+  background: rgba(180, 133, 48, 0.15);
+  color: var(--gold-dark);
+}
+
+/* Surah Cards Grid */
+.surah-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .surah-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.surah-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.surah-card:hover {
+  transform: translateY(-3px);
+  background: var(--bg-card-hover);
+  border-color: var(--gold-primary);
+  box-shadow: var(--shadow-gold);
+}
+
+.surah-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.surah-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.surah-num-badge {
+  width: 38px;
+  height: 38px;
+  background: rgba(229, 184, 105, 0.12);
+  border: 1px solid var(--border-gold);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold-primary);
+  transform: rotate(45deg);
+}
+
+.surah-num-badge span {
+  transform: rotate(-45deg);
+}
+
+.surah-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.surah-info p {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.surah-arabic-title {
+  font-family: var(--font-arabic);
+  font-size: 1.45rem;
+  color: var(--gold-primary);
+  direction: rtl;
+  letter-spacing: 0;
+}
+
+.surah-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 10px;
+}
+
+.surah-progress-wrap {
+  flex: 1;
+  max-width: 120px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.surah-progress-wrap .mini-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.surah-progress-wrap .mini-fill {
+  height: 100%;
+  background: var(--emerald-primary);
+  border-radius: var(--radius-full);
+}
+
+.surah-progress-wrap span {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   LAYAR HAFALAN (MEMORIZATION SCREEN)
+   ========================================================================== */
+
+.memorize-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 180px; /* Space for floating repetition & audio player */
+}
+
+.memorize-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  position: sticky;
+  top: 12px;
+  z-index: 90;
+}
+
+.header-center-info {
+  text-align: center;
+}
+
+.header-center-info h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+[data-theme="light"] .header-center-info h2 {
+  color: var(--gold-dark);
+}
+
+.header-center-info p {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+/* Bismillah Banner */
+.bismillah-card {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(229, 184, 105, 0.08) 0%, transparent 100%);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border-gold);
+  margin-bottom: 8px;
+}
+
+.bismillah-card .arabic-bismillah {
+  font-family: var(--font-arabic);
+  font-size: 2rem;
+  color: var(--gold-primary);
+  direction: rtl;
+}
+
+.bismillah-card p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* Verses List */
+.verses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ayah-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* Active Highlight Style for currently repeating verse */
+.ayah-card.active-ayah {
+  border-color: var(--gold-primary);
+  background: linear-gradient(135deg, rgba(229, 184, 105, 0.12), rgba(16, 185, 129, 0.1));
+  box-shadow: 0 0 25px var(--gold-glow);
+  transform: scale(1.01);
+}
+
+.ayah-card.in-block {
+  border-left: 4px solid var(--emerald-primary);
+}
+
+.ayah-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ayah-roundel {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold-primary);
+  background: rgba(229, 184, 105, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gold-primary);
+}
+
+.ayah-status-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-btn {
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+}
+
+.status-btn.selected-gray {
+  background: rgba(100, 116, 139, 0.3);
+  color: #cbd5e1;
+  border-color: var(--status-gray);
+}
+
+.status-btn.selected-yellow {
+  background: rgba(245, 158, 11, 0.25);
+  color: #fbbf24;
+  border-color: var(--status-yellow);
+}
+
+.status-btn.selected-green {
+  background: rgba(16, 185, 129, 0.25);
+  color: #34d399;
+  border-color: var(--status-green);
+  box-shadow: 0 0 8px var(--emerald-glow);
+}
+
+.arabic-verse-text {
+  font-family: var(--font-arabic);
+  font-size: var(--font-size-arabic);
+  line-height: 2.2;
+  text-align: right;
+  direction: rtl;
+  color: #ffffff;
+  padding: 6px 0;
+  word-spacing: 4px;
+}
+
+[data-theme="light"] .arabic-verse-text {
+  color: #0f172a;
+}
+
+.latin-transliteration {
+  font-size: 0.95rem;
+  color: var(--gold-light);
+  line-height: 1.6;
+  font-style: italic;
+  font-weight: 500;
+}
+
+[data-theme="light"] .latin-transliteration {
+  color: var(--gold-dark);
+}
+
+.indonesian-translation {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  border-left: 2px solid var(--border-gold);
+  padding-left: 10px;
+}
+
+.ayah-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.text-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+
+.text-btn:hover {
+  color: var(--gold-primary);
+  background: rgba(229, 184, 105, 0.1);
+}
+
+/* ==========================================================================
+   FLOATING AUDIO & REPETITION CONTROLLER (Bawah Mengambang)
+   ========================================================================== */
+
+.floating-audio-controller {
+  position: fixed;
+  bottom: 80px; /* Just above bottom nav */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  max-width: 860px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  z-index: 95;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Pause & Recite Countdown Banner */
+.pause-countdown-banner {
+  background: linear-gradient(90deg, #059669, #d97706);
+  color: #ffffff;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s;
+}
+
+.pause-bar-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.pause-bar-fill {
+  height: 100%;
+  background: #fde68a;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* Repetition Settings Ribbon */
+.repetition-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.counter-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.counter-badge {
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+  color: #071311;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 10px var(--gold-glow);
+  letter-spacing: 0.5px;
+}
+
+.ribbon-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip-select {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+}
+
+.chip-select:focus {
+  border-color: var(--gold-primary);
+}
+
+.chip-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.chip-btn.active,
+.chip-btn:hover {
+  background: rgba(229, 184, 105, 0.2);
+  border-color: var(--gold-primary);
+  color: var(--gold-light);
+}
+
+/* Audio Player Bottom Deck */
+.audio-deck {
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.audio-progress-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.time-stamp {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  min-width: 34px;
+}
+
+.audio-scrubber {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 5px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+  cursor: pointer;
+}
+
+.audio-scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold-primary);
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--gold-glow);
+}
+
+.player-main-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player-left,
+.player-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.15rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--gold-primary);
+}
+
+.play-main-btn {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+  color: #071311;
+  font-size: 1.35rem;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 18px var(--gold-glow);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.play-main-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px var(--gold-glow);
+}
+
+.rec-badge-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rec-badge-btn:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #fff;
+}
+
+/* ==========================================================================
+   BOTTOM NAVIGATION BAR
+   ========================================================================== */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-gold);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 100;
+  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  padding: 6px 16px;
+  border-radius: var(--radius-md);
+}
+
+.nav-item .nav-icon {
+  font-size: 1.25rem;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  color: var(--gold-primary);
+}
+
+.nav-item.active .nav-icon {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 6px var(--gold-glow));
+}
+
+/* ==========================================================================
+   MODALS & DRAWERS (Rekam, Kuis, Pengaturan)
+   ========================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-box {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(20px);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-overlay.open .modal-box {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.modal-header h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+[data-theme="light"] .modal-header h3 {
+  color: var(--gold-dark);
+}
+
+.modal-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Record & Compare Component */
+.record-visualizer-wrap {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  text-align: center;
+}
+
+#recordCanvas {
+  width: 100%;
+  height: 80px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.record-btn-trigger {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ef4444;
+  color: #fff;
+  border: 4px solid rgba(239, 68, 68, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  margin: 12px auto;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+  transition: all 0.2s;
+}
+
+.record-btn-trigger.recording {
+  animation: pulse-red 1.2s infinite;
+  background: #dc2626;
+}
+
+@keyframes pulse-red {
+  0% { transform: scale(1); box-shadow: 0 0 10px rgba(239, 68, 68, 0.4); }
+  50% { transform: scale(1.1); box-shadow: 0 0 25px rgba(239, 68, 68, 0.8); }
+  100% { transform: scale(1); box-shadow: 0 0 10px rgba(239, 68, 68, 0.4); }
+}
+
+.compare-audios-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.compare-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.compare-card h4 {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.secondary-play-btn {
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(229, 184, 105, 0.2);
+  border: 1px solid var(--gold-primary);
+  color: var(--gold-light);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.secondary-play-btn:hover {
+  background: var(--gold-primary);
+  color: #071311;
+}
+
+/* ==========================================================================
+   QUIZ / EVALUASI SCREEN STYLING
+   ========================================================================== */
+
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.quiz-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.quiz-opt-btn {
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  text-align: right;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.quiz-opt-btn .arabic-opt {
+  font-family: var(--font-arabic);
+  font-size: 1.5rem;
+  color: var(--gold-light);
+}
+
+.quiz-opt-btn:hover {
+  border-color: var(--gold-primary);
+  background: rgba(229, 184, 105, 0.1);
+}
+
+.quiz-opt-btn.correct {
+  background: rgba(16, 185, 129, 0.25) !important;
+  border-color: var(--emerald-primary) !important;
+  color: #34d399 !important;
+}
+
+.quiz-opt-btn.wrong {
+  background: rgba(239, 68, 68, 0.25) !important;
+  border-color: #ef4444 !important;
+  color: #fca5a5 !important;
+}
+
+/* Settings Form Controls */
+.setting-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 14px;
+}
+
+.setting-row label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.setting-row select,
+.setting-row input[type="range"] {
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: inherit;
+}
+
+/* Utilities */
+.hidden {
+  display: none !important;
+}
+
+.text-gold {
+  color: var(--gold-primary) !important;
+}
+
+.text-emerald {
+  color: var(--emerald-primary) !important;
+}

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MurojaahKu - Hafalan Juz 30 Cerdas & Sistem Repetisi 10x</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Amiri Quran -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- TOP HEADER -->
+    <header class="top-bar">
+      <div class="brand">
+        <div class="brand-icon">📖</div>
+        <div class="brand-text">
+          <h1>MurojaahKu</h1>
+          <span>Hafalan Juz 30 Cerdas</span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="themeToggleBtn" title="Ganti Tema" onclick="toggleTheme()">
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <!-- ==========================================================================
+         VIEW 1: DASHBOARD (BERANDA)
+         ========================================================================== -->
+    <main id="dashboardScreen" class="view-screen">
+      
+      <!-- Hero Overall Juz 30 Progress Banner -->
+      <section class="hero-stats-card">
+        <div class="hero-content">
+          <div class="hero-header">
+            <div class="hero-title">
+              <h2>Progres Hafalan Juz 30</h2>
+              <p>Metode Repetisi Cerdas (1x hingga 10x Murojaah)</p>
+            </div>
+            <div class="streak-badge">
+              🔥 <span>Streak 5 Hari</span>
+            </div>
+          </div>
+
+          <div class="progress-overall-bar-container">
+            <div class="progress-labels">
+              <span>Kelancaran Juz 30</span>
+              <span id="overallPercent" class="text-gold">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div id="overallProgressBar" class="progress-bar-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-num" id="statMasteredAyah">0 / 564</span>
+              <span class="stat-label">Ayat Mutqin (Lancar)</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num" id="statCompletedSurah">0 / 37</span>
+              <span class="stat-label">Surah Tuntas</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">Juz 30</span>
+              <span class="stat-label">An-Naba' - An-Nas</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filter & Search Controls -->
+      <section class="filter-section">
+        <div class="search-input-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchSurahInput" placeholder="Cari surah (misal: An-Naba, Al-Ikhlas, 78)...">
+        </div>
+
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-category="all">Semua (37 Surah)</button>
+          <button class="filter-tab" data-category="unmemorized">⚪ Belum Dihafal</button>
+          <button class="filter-tab" data-category="learning">🟡 Sedang Murojaah</button>
+          <button class="filter-tab" data-category="mastered">🟢 Sudah Lancar</button>
+        </div>
+      </section>
+
+      <!-- Surah Cards Grid -->
+      <section id="surahGridContainer" class="surah-grid">
+        <!-- Injected via JavaScript -->
+      </section>
+
+    </main>
+
+    <!-- ==========================================================================
+         VIEW 2: MEMORIZATION SCREEN (LAYAR HAFALAN)
+         ========================================================================== -->
+    <main id="memorizeScreen" class="view-screen hidden memorize-screen">
+      
+      <!-- Top Sticky Navigation Bar -->
+      <div class="memorize-header">
+        <button class="icon-btn" onclick="switchTab('dashboard')" title="Kembali ke Daftar Surah">
+          ⬅️
+        </button>
+
+        <div class="header-center-info">
+          <h2 id="activeSurahTitle">An-Naba'</h2>
+          <p id="activeRangeIndicator">Ayat 1 dari 40</p>
+        </div>
+
+        <button class="icon-btn" onclick="openQuickSettingsModal()" title="Pengaturan Teks & Pemutar">
+          ⚙️
+        </button>
+      </div>
+
+      <!-- Loading State Indicator -->
+      <div id="memorizeLoading" class="bismillah-card hidden">
+        <p>Memuat ayat-ayat surah...</p>
+      </div>
+
+      <!-- Bismillah Banner -->
+      <div id="bismillahCard" class="bismillah-card">
+        <div class="arabic-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        <p>Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang</p>
+      </div>
+
+      <!-- List of Verses -->
+      <div id="versesContainer" class="verses-list">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </main>
+
+    <!-- ==========================================================================
+         VIEW 3: QUIZ & EVALUATION (TES SAMBUNG AYAT)
+         ========================================================================== -->
+    <main id="quizScreen" class="view-screen hidden">
+      
+      <div class="quiz-container">
+        <!-- Quiz Setup Card -->
+        <div id="quizSetupCard" class="quiz-card">
+          <h2 style="font-size: 1.3rem; margin-bottom: 6px; color: var(--gold-light);">Tes Sambung Ayat (Evaluasi)</h2>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">
+            Uji kekuatan hafalan Anda dengan kuis sambung ayat audio-visual. Pilih surah yang ingin diuji:
+          </p>
+
+          <div class="setting-row">
+            <label for="quizSurahSelect">Pilih Surah untuk Diuji:</label>
+            <select id="quizSurahSelect">
+              <!-- Injected dynamically -->
+            </select>
+          </div>
+
+          <button class="secondary-play-btn" style="width: 100%; margin-top: 18px; padding: 14px; font-size: 1rem;" onclick="startQuizFromUI()">
+            🚀 Mulai Tes Hafalan
+          </button>
+        </div>
+
+        <!-- Quiz Gameplay Card -->
+        <div id="quizPlayCard" class="quiz-card hidden">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <span id="quizIndexTitle" style="font-size: 0.85rem; font-weight: 700; color: var(--gold-primary);">Soal 1 dari 5</span>
+            <span id="quizQuestionSurahInfo" style="font-size: 0.8rem; color: var(--text-muted);">An-Naba'</span>
+          </div>
+
+          <div style="background: rgba(0,0,0,0.3); border-radius: var(--radius-md); padding: 20px; text-align: center; border: 1px solid var(--border-gold);">
+            <div id="quizQuestionArabic" class="arabic-verse-text" style="font-size: 2.2rem; text-align: center;">...</div>
+            <div id="quizQuestionLatin" class="latin-transliteration" style="margin-top: 8px;">...</div>
+            
+            <button class="text-btn" style="margin-top: 14px; color: var(--gold-primary);" onclick="playQuizQuestionAudio()">
+              🔊 Dengarkan Lantunan Ayat Ini
+            </button>
+          </div>
+
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 20px; font-weight: 600;">
+            Pilihlah ayat sambungan yang benar selanjutnya:
+          </p>
+
+          <div id="quizOptionsContainer" class="quiz-options-list">
+            <!-- Options buttons injected here -->
+          </div>
+        </div>
+
+        <!-- Quiz Result Card -->
+        <div id="quizResultCard" class="quiz-card hidden" style="text-align: center;">
+          <h2 style="font-size: 1.5rem; color: var(--gold-primary); margin-bottom: 8px;">Hasil Evaluasi Hafalan</h2>
+          
+          <div style="font-size: 3rem; font-weight: 800; color: var(--text-gold); margin: 16px 0;" id="quizResultScore">
+            5 / 5
+          </div>
+          
+          <h3 id="quizResultGrade" style="font-size: 1.15rem; color: #34d399; margin-bottom: 8px;">
+            Mumtaz! (Luar Biasa)
+          </h3>
+          
+          <p id="quizResultNote" style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 24px;">
+            Hafalan Anda mutqin dan lancar.
+          </p>
+
+          <div style="display: flex; gap: 12px; justify-content: center;">
+            <button class="secondary-play-btn" onclick="resetQuiz()">
+              🔄 Coba Surah Lain
+            </button>
+            <button class="secondary-play-btn" style="background: var(--emerald-primary); border-color: var(--emerald-primary); color: #fff;" onclick="switchTab('dashboard')">
+              Kembali ke Beranda
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ==========================================================================
+         VIEW 4: PROFILE & SETTINGS
+         ========================================================================== -->
+    <main id="profileScreen" class="view-screen hidden">
+      
+      <div class="quiz-card" style="display: flex; flex-direction: column; gap: 20px;">
+        <h2 style="font-size: 1.3rem; color: var(--gold-light);">Pengaturan & Preferensi</h2>
+
+        <!-- Pilihan Qari -->
+        <div class="setting-row">
+          <label for="profileQariSelect">Pilihan Suara Murattal / Qari:</label>
+          <select id="profileQariSelect" onchange="updateQariSelection(this.value)">
+            <!-- Options dynamically populated -->
+          </select>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">
+            💡 Tips: Syaikh Mahmoud Khalil Al-Husary sangat direkomendasikan untuk menghafal karena tempo murattal yang lambat dan makhraj yang sangat presisi.
+          </span>
+        </div>
+
+        <!-- Ukuran Font Arab -->
+        <div class="setting-row">
+          <div style="display: flex; justify-content: space-between;">
+            <label for="profileFontSlider">Ukuran Khat Teks Arab:</label>
+            <span id="fontValLabel" style="font-weight: 700; color: var(--gold-primary);">32px</span>
+          </div>
+          <input type="range" id="profileFontSlider" min="22" max="48" value="32" oninput="updateArabicFontSize(this.value)">
+          <div style="font-family: var(--font-arabic); font-size: var(--font-size-arabic); text-align: center; padding: 10px; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm);">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </div>
+        </div>
+
+        <!-- Tampilan Transliterasi & Terjemahan -->
+        <div class="setting-row">
+          <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+            <span>Tampilkan Teks Latin (Transliterasi)</span>
+            <input type="checkbox" id="toggleTransliteration" onchange="updateTransliterationToggle(this.checked)" checked>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+            <span>Tampilkan Terjemahan Bahasa Indonesia</span>
+            <input type="checkbox" id="toggleTranslation" onchange="updateTranslationToggle(this.checked)" checked>
+          </label>
+        </div>
+
+        <!-- Pilihan Tema -->
+        <div class="setting-row">
+          <label for="themeSelect">Tema Tampilan:</label>
+          <select id="themeSelect" onchange="applyTheme(this.value)">
+            <option value="dark">Emerald Midnight (Gelap Mewah)</option>
+            <option value="light">Pearl Gold (Terang Elegan)</option>
+          </select>
+        </div>
+
+        <!-- Data Management -->
+        <div class="setting-row" style="border: none;">
+          <label>Penyimpanan & Cadangan Data:</label>
+          <div style="display: flex; gap: 10px; margin-top: 6px;">
+            <button class="secondary-play-btn" style="flex: 1;" onclick="exportProgressJson()">
+              💾 Unduh Cadangan JSON
+            </button>
+            <button class="secondary-play-btn" style="flex: 1; border-color: #ef4444; color: #ef4444;" onclick="resetAllProgress()">
+              ⚠️ Reset Progres
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div> <!-- End .app-container -->
+
+  <!-- ==========================================================================
+       FLOATING AUDIO & REPETITION CONTROLLER (Layar Hafalan)
+       ========================================================================== -->
+  <aside id="floatingAudioController" class="floating-audio-controller hidden">
+    
+    <!-- Pause Gap (Echo Mode) Visual Countdown Bar -->
+    <div id="pauseCountdownBanner" class="pause-countdown-banner hidden">
+      <span id="pauseCountdownSec">Giliran Anda Melafalkan: 2.0s</span>
+      <span style="font-size: 0.75rem;">🎙️ Ulangi bacaan ayat sekarang</span>
+    </div>
+    <div class="pause-bar-track">
+      <div id="pauseBarFill" class="pause-bar-fill"></div>
+    </div>
+
+    <!-- Repetition Settings Ribbon -->
+    <div class="repetition-ribbon">
+      <div class="counter-pill">
+        <span style="font-size: 0.78rem; color: var(--text-secondary);">Murojaah:</span>
+        <div id="repeatCounterPill" class="counter-badge">[ 1 / 10 ]</div>
+      </div>
+
+      <div class="ribbon-controls">
+        <!-- Target Repeat Selector Chips -->
+        <div style="display: flex; gap: 4px; align-items: center;">
+          <span style="font-size: 0.72rem; color: var(--text-muted);">Target:</span>
+          <button class="chip-btn rep-chip" data-val="1" onclick="setTargetRepetitionFromUI(1)">1x</button>
+          <button class="chip-btn rep-chip" data-val="3" onclick="setTargetRepetitionFromUI(3)">3x</button>
+          <button class="chip-btn rep-chip" data-val="5" onclick="setTargetRepetitionFromUI(5)">5x</button>
+          <button class="chip-btn rep-chip" data-val="7" onclick="setTargetRepetitionFromUI(7)">7x</button>
+          <button class="chip-btn rep-chip active" data-val="10" onclick="setTargetRepetitionFromUI(10)">10x</button>
+        </div>
+
+        <!-- Loop Mode Selector Chips -->
+        <div style="display: flex; gap: 4px; align-items: center; border-left: 1px solid var(--border-subtle); padding-left: 8px;">
+          <button class="chip-btn loop-chip active" data-mode="single" onclick="setLoopModeFromUI('single')" title="Ulang per 1 ayat">
+            Per Ayat
+          </button>
+          <button class="chip-btn loop-chip" data-mode="block" onclick="setLoopModeFromUI('block')" title="Ulang per blok 3-5 ayat">
+            Blok (3 Ayat)
+          </button>
+        </div>
+
+        <!-- Pause Gap Chips -->
+        <div style="display: flex; gap: 4px; align-items: center; border-left: 1px solid var(--border-subtle); padding-left: 8px;">
+          <span style="font-size: 0.72rem; color: var(--text-muted);">Jeda:</span>
+          <button class="chip-btn pause-chip" data-gap="none" onclick="setPauseGapFromUI('none')">0s</button>
+          <button class="chip-btn pause-chip active" data-gap="2s" onclick="setPauseGapFromUI('2s')">2s</button>
+          <button class="chip-btn pause-chip" data-gap="echo" onclick="setPauseGapFromUI('echo')" title="Jeda sepanjang durasi ayat untuk mengulang">Echo</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audio Player Deck -->
+    <div class="audio-deck">
+      <!-- Scrubber progress bar -->
+      <div class="audio-progress-bar-wrap">
+        <span id="timeCurrent" class="time-stamp">0:00</span>
+        <input type="range" id="audioScrubber" class="audio-scrubber" min="0" max="100" value="0" oninput="seekAudio(event)">
+        <span id="timeTotal" class="time-stamp">0:00</span>
+      </div>
+
+      <!-- Main Controls -->
+      <div class="player-main-controls">
+        <div class="player-left">
+          <button class="rec-badge-btn" onclick="openRecordDrawer(audioEngine.currentIndex + 1)">
+            🎙️ Rekam & Bandingkan
+          </button>
+        </div>
+
+        <div class="player-center">
+          <button class="control-btn" onclick="prevAyah()" title="Ayat Sebelumnya">
+            ⏮️
+          </button>
+          <button class="control-btn" onclick="audioEngine.seekRelative(-5)" title="Mundur 5 detik">
+            ⏪
+          </button>
+          <button id="playMainBtn" class="play-main-btn" onclick="togglePlay()" title="Putar / Jeda">
+            ▶️
+          </button>
+          <button class="control-btn" onclick="audioEngine.seekRelative(5)" title="Maju 5 detik">
+            ⏩
+          </button>
+          <button class="control-btn" onclick="nextAyah()" title="Ayat Selanjutnya">
+            ⏭️
+          </button>
+        </div>
+
+        <div class="player-right">
+          <button class="icon-btn" onclick="openQuickSettingsModal()" title="Pengaturan Lanjutan">
+            ⚙️
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ==========================================================================
+       BOTTOM NAVIGATION BAR (3 Core Menus)
+       ========================================================================== -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
+      <span class="nav-icon">📖</span>
+      <span>Beranda</span>
+    </button>
+    <button class="nav-item" data-tab="quiz" onclick="switchTab('quiz')">
+      <span class="nav-icon">🎯</span>
+      <span>Murojaah / Tes</span>
+    </button>
+    <button class="nav-item" data-tab="profile" onclick="switchTab('profile')">
+      <span class="nav-icon">⚙️</span>
+      <span>Pengaturan</span>
+    </button>
+  </nav>
+
+  <!-- ==========================================================================
+       MODAL 1: MODE REKAM & BANDINGKAN
+       ========================================================================== -->
+  <div id="recordModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="recordModalAyahTitle">Rekam & Bandingkan</h3>
+        <button class="icon-btn" onclick="closeRecordDrawer()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="background: rgba(0,0,0,0.25); border-radius: var(--radius-md); padding: 14px; text-align: right;">
+          <div id="recordModalArabic" class="arabic-verse-text" style="font-size: 1.8rem;">...</div>
+        </div>
+
+        <div class="record-visualizer-wrap">
+          <canvas id="recordCanvas" width="400" height="80"></canvas>
+          <p id="recordStatusText" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px;">
+            Tekan mikrofon untuk merekam lafal Anda
+          </p>
+          <button id="recordTriggerBtn" class="record-btn-trigger" onclick="toggleRecordBtn()">
+            🎙️
+          </button>
+        </div>
+
+        <!-- Audio Comparison Deck -->
+        <div class="compare-audios-grid">
+          <div class="compare-card">
+            <h4>Suara Qari</h4>
+            <button class="secondary-play-btn" onclick="playQariForComparison()">
+              ▶️ Putar Qari
+            </button>
+          </div>
+
+          <div id="userReciteCard" class="compare-card hidden">
+            <h4>Rekaman Anda</h4>
+            <button class="secondary-play-btn" onclick="playUserForComparison()">
+              ▶️ Putar Suara Saya
+            </button>
+          </div>
+        </div>
+
+        <!-- Self Evaluation Buttons -->
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 14px;">
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; text-align: center;">
+            Evaluasi kelancaran & makhraj Anda setelah mendengarkan:
+          </p>
+          <div style="display: flex; gap: 8px;">
+            <button class="secondary-play-btn" style="flex: 1; border-color: var(--status-yellow); color: var(--status-yellow);" onclick="evaluateSelfRecite(1)">
+              🟡 Masih Terbata
+            </button>
+            <button class="secondary-play-btn" style="flex: 1; border-color: var(--status-green); color: #34d399;" onclick="evaluateSelfRecite(2)">
+              🟢 Lancar & Fasih
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 2: QUICK SETTINGS MODAL
+       ========================================================================== -->
+  <div id="quickSettingsModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Pengaturan Cepat Pemutar</h3>
+        <button class="icon-btn" onclick="closeQuickSettingsModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="setting-row">
+          <label>Target Pengulangan per Ayat (Murojaah):</label>
+          <select onchange="setTargetRepetitionFromUI(parseInt(this.value)); closeQuickSettingsModal();">
+            <option value="1" ${AppState.settings.targetRepeat === 1 ? 'selected' : ''}>1x (Putar Normal)</option>
+            <option value="3" ${AppState.settings.targetRepeat === 3 ? 'selected' : ''}>3x (Pengulangan Ringan)</option>
+            <option value="5" ${AppState.settings.targetRepeat === 5 ? 'selected' : ''}>5x (Pengulangan Sedang)</option>
+            <option value="7" ${AppState.settings.targetRepeat === 7 ? 'selected' : ''}>7x (Pemantapan)</option>
+            <option value="10" ${AppState.settings.targetRepeat === 10 ? 'selected' : ''}>10x (Metode Mutqin - Sangat Dianjurkan)</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <label>Mode Repetisi:</label>
+          <select onchange="setLoopModeFromUI(this.value); closeQuickSettingsModal();">
+            <option value="single" ${AppState.settings.loopMode === 'single' ? 'selected' : ''}>Ayat Tunggal (Ulang per 1 ayat)</option>
+            <option value="block" ${AppState.settings.loopMode === 'block' ? 'selected' : ''}>Mode Blok Ayat (Ulang per 3-5 ayat sekaligus)</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <label>Jeda Waktu Antar Ayat:</label>
+          <select onchange="setPauseGapFromUI(this.value); closeQuickSettingsModal();">
+            <option value="none" ${AppState.settings.pauseGap === 'none' ? 'selected' : ''}>Tanpa Jeda (Lanjut Langsung)</option>
+            <option value="2s" ${AppState.settings.pauseGap === '2s' ? 'selected' : ''}>Jeda 2 Detik (Napas Singkat)</option>
+            <option value="echo" ${AppState.settings.pauseGap === 'echo' ? 'selected' : ''}>Jeda Sepanjang Durasi Ayat (Echo Mode / Menirukan Qari)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT INCLUSIONS -->
+  <script src="data/surahs.js"></script>
+  <script src="data/quranData.js"></script>
+  <script src="audioEngine.js"></script>
+  <script src="recorder.js"></script>
+  <script src="quiz.js"></script>
+  <script src="app.js"></script>
+
+  <script>
+    // Quick helper for top theme toggle
+    function toggleTheme() {
+      const current = AppState.settings.theme;
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    }
+  </script>
+
+</body>
+</html>
